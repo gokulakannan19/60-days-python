@@ -1,0 +1,448 @@
+1
+00:00:01,117 --> 00:00:01,950
+Instructor: In this video,
+
+2
+00:00:01,950 --> 00:00:04,470
+you will learn how to use the Python Console.
+
+3
+00:00:04,470 --> 00:00:09,300
+That is a tool which will make your programming easier.
+
+4
+00:00:09,300 --> 00:00:11,910
+So what is the Python Console?
+
+5
+00:00:11,910 --> 00:00:13,650
+Where can you access it?
+
+6
+00:00:13,650 --> 00:00:16,800
+If you are on PyCharm, it's very easy to access the console.
+
+7
+00:00:16,800 --> 00:00:18,240
+You can just go to this tab,
+
+8
+00:00:18,240 --> 00:00:21,750
+press it and this will open the Python Console.
+
+9
+00:00:21,750 --> 00:00:24,030
+You know the console is working,
+
+10
+00:00:24,030 --> 00:00:26,073
+when you see these three arrows.
+
+11
+00:00:27,720 --> 00:00:30,450
+If you don't have this Python Console,
+
+12
+00:00:30,450 --> 00:00:32,073
+because you're in another IDE,
+
+13
+00:00:32,910 --> 00:00:36,000
+there's another way to open the Python Console.
+
+14
+00:00:36,000 --> 00:00:40,380
+Your IDE probably has a Terminal Tool,
+
+15
+00:00:40,380 --> 00:00:42,063
+so you can open the Terminal,
+
+16
+00:00:42,900 --> 00:00:47,100
+and then here you can write one of these commands,
+
+17
+00:00:47,100 --> 00:00:51,753
+either python, you can also try py -3,
+
+18
+00:00:52,620 --> 00:00:54,933
+press enter to see if it works,
+
+19
+00:00:55,830 --> 00:00:59,820
+or python3.10 or python3.11.
+
+20
+00:00:59,820 --> 00:01:01,440
+So one of these will work.
+
+21
+00:01:01,440 --> 00:01:05,519
+In my case, python works well.
+
+22
+00:01:05,519 --> 00:01:08,700
+So I see these three arrows in here.
+
+23
+00:01:08,700 --> 00:01:11,250
+But on PyCharm, I can just use
+
+24
+00:01:11,250 --> 00:01:14,550
+the embedded Python Console in here,
+
+25
+00:01:14,550 --> 00:01:16,830
+which is the same thing as the one you get
+
+26
+00:01:16,830 --> 00:01:17,883
+from the Terminal.
+
+27
+00:01:19,470 --> 00:01:22,110
+So what is the Python Console?
+
+28
+00:01:22,110 --> 00:01:23,460
+Well, in the console here,
+
+29
+00:01:23,460 --> 00:01:28,460
+you can write Python code just like you do in a .py file.
+
+30
+00:01:29,430 --> 00:01:31,770
+So for example, you can declare variables,
+
+31
+00:01:31,770 --> 00:01:33,220
+you can do whatever you want.
+
+32
+00:01:34,380 --> 00:01:37,563
+Prompt is able to enter a todo,
+
+33
+00:01:39,270 --> 00:01:40,173
+press enter,
+
+34
+00:01:41,310 --> 00:01:45,690
+and then you can continue coding,
+
+35
+00:01:45,690 --> 00:01:49,710
+and you get the output immediately.
+
+36
+00:01:49,710 --> 00:01:52,440
+So enter a todo is the string that we stored
+
+37
+00:01:52,440 --> 00:01:54,783
+in user_prompt and we got that printed out.
+
+38
+00:01:56,880 --> 00:02:01,880
+But if you close the console and then you open it again,
+
+39
+00:02:04,050 --> 00:02:06,453
+and then you try to print out user_prompt,
+
+40
+00:02:07,560 --> 00:02:10,139
+you'll get an error because you lost
+
+41
+00:02:10,139 --> 00:02:13,350
+the code that you wrote previously.
+
+42
+00:02:13,350 --> 00:02:18,350
+So the Python Console is only used for throw away code.
+
+43
+00:02:18,660 --> 00:02:20,820
+So quick code you want to just test
+
+44
+00:02:20,820 --> 00:02:23,133
+out to see how things work.
+
+45
+00:02:24,270 --> 00:02:27,540
+For example, let's say we were programming here.
+
+46
+00:02:27,540 --> 00:02:31,200
+We defined variable and then we are not sure
+
+47
+00:02:31,200 --> 00:02:35,190
+if we want to use an input function or something else.
+
+48
+00:02:35,190 --> 00:02:37,170
+So we quickly go to the console
+
+49
+00:02:37,170 --> 00:02:40,140
+and try the input function here to see
+
+50
+00:02:40,140 --> 00:02:42,450
+if that's the right thing we want to use.
+
+51
+00:02:42,450 --> 00:02:45,870
+So you can just press enter and you get this prompt.
+
+52
+00:02:45,870 --> 00:02:50,130
+Hey, it asks you to enter some input.
+
+53
+00:02:50,130 --> 00:02:52,980
+So now we know that this is probably
+
+54
+00:02:52,980 --> 00:02:55,053
+the function we are looking for.
+
+55
+00:02:55,980 --> 00:02:58,060
+Or maybe you just want to check the type
+
+56
+00:02:59,283 --> 00:03:02,733
+of this text enter todo.
+
+57
+00:03:03,690 --> 00:03:07,680
+You press enter and you get the type,
+
+58
+00:03:07,680 --> 00:03:09,570
+so you know that it is a string.
+
+59
+00:03:09,570 --> 00:03:14,073
+So you don't have to write that code in your program file.
+
+60
+00:03:17,370 --> 00:03:21,300
+So as you can see, the Python Console has pros and cons.
+
+61
+00:03:21,300 --> 00:03:25,710
+The pro is that you can quickly get output,
+
+62
+00:03:25,710 --> 00:03:27,940
+and the con is that
+
+63
+00:03:29,010 --> 00:03:30,480
+the code is lost
+
+64
+00:03:30,480 --> 00:03:34,263
+once you close the Python Console tab.
+
+65
+00:03:36,780 --> 00:03:39,210
+Now it's important to understand
+
+66
+00:03:39,210 --> 00:03:42,120
+how exactly the console is working.
+
+67
+00:03:42,120 --> 00:03:45,690
+So what happens when you run a normal .py file
+
+68
+00:03:45,690 --> 00:03:49,560
+is that Python executes this line,
+
+69
+00:03:49,560 --> 00:03:51,240
+and then it executes that line,
+
+70
+00:03:51,240 --> 00:03:53,310
+that one, that one, and so on.
+
+71
+00:03:53,310 --> 00:03:57,510
+So it executes all the lines in a split of a second.
+
+72
+00:03:57,510 --> 00:04:00,870
+Now the console, the things are different.
+
+73
+00:04:00,870 --> 00:04:03,930
+You execute lines one by one.
+
+74
+00:04:03,930 --> 00:04:08,700
+So you write that line first, press enter,
+
+75
+00:04:08,700 --> 00:04:10,380
+Python executes that.
+
+76
+00:04:10,380 --> 00:04:13,140
+You can also see here on the left that a variable
+
+77
+00:04:13,140 --> 00:04:16,079
+has been registered in the session here.
+
+78
+00:04:16,079 --> 00:04:18,540
+So the execution now is halting,
+
+79
+00:04:18,540 --> 00:04:22,230
+is an on demand interpreter.
+
+80
+00:04:22,230 --> 00:04:24,600
+Basically the interpreter is waiting
+
+81
+00:04:24,600 --> 00:04:29,463
+for lines from the programmer to be executed.
+
+82
+00:04:30,450 --> 00:04:33,210
+So in this session now you have, you have access
+
+83
+00:04:33,210 --> 00:04:36,820
+to that variable and maybe other variables
+
+84
+00:04:40,260 --> 00:04:42,720
+that you define and execute in here.
+
+85
+00:04:42,720 --> 00:04:44,790
+So other is also a variable.
+
+86
+00:04:44,790 --> 00:04:48,030
+You can also see the type here, str.
+
+87
+00:04:48,030 --> 00:04:52,443
+So hello is a string, enter a todo is also a string.
+
+88
+00:04:54,300 --> 00:04:55,840
+mylist would be
+
+89
+00:04:57,960 --> 00:04:58,793
+a list.
+
+90
+00:04:58,793 --> 00:05:00,150
+You can see here list.
+
+91
+00:05:00,150 --> 00:05:03,603
+And it has this zero, which means there are zero items.
+
+92
+00:05:04,980 --> 00:05:09,980
+If you want to call a previously executed item, you go here,
+
+93
+00:05:10,290 --> 00:05:13,560
+put the cursor in here, and then press the upper arrow key
+
+94
+00:05:13,560 --> 00:05:15,450
+on your keyboard and that will call
+
+95
+00:05:15,450 --> 00:05:18,780
+the previously executed expression.
+
+96
+00:05:18,780 --> 00:05:21,210
+If you press the upper key again,
+
+97
+00:05:21,210 --> 00:05:25,233
+it calls the expression before that and so on.
+
+98
+00:05:26,340 --> 00:05:30,360
+You go back again with down arrow key,
+
+99
+00:05:30,360 --> 00:05:33,030
+up, down, until you find what you want.
+
+100
+00:05:33,030 --> 00:05:38,030
+So my list could have more items such as hello, hi.
+
+101
+00:05:39,330 --> 00:05:43,770
+So two strings you see these are split with a comma,
+
+102
+00:05:43,770 --> 00:05:47,130
+press and now my list has been updated.
+
+103
+00:05:47,130 --> 00:05:50,403
+You see these are two items now.
+
+104
+00:05:53,310 --> 00:05:55,200
+So that's about the Python Console.
+
+105
+00:05:55,200 --> 00:05:58,680
+It's a great way to help you with programming,
+
+106
+00:05:58,680 --> 00:06:02,220
+and also excellent for learning.
+
+107
+00:06:02,220 --> 00:06:07,220
+So you can experiment very quickly using the Python Console.
+
+108
+00:06:07,650 --> 00:06:09,930
+And of course when you want to write a program,
+
+109
+00:06:09,930 --> 00:06:11,550
+you want to store the code
+
+110
+00:06:11,550 --> 00:06:14,790
+in a Python file because the file is stored
+
+111
+00:06:14,790 --> 00:06:18,240
+on disk so you don't lose the changes.
+
+112
+00:06:18,240 --> 00:06:20,740
+With that, I thank you and I'll talk to you later.
+

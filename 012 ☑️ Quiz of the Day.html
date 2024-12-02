@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      ul,
+      ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      code {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .quiz-content {
+        padding: 2.4rem;
+        word-break: break-word;
+        max-width: 86rem;
+        margin: 0 auto;
+      }
+      .quiz-container {
+        margin: 0 auto;
+        max-width: 84rem;
+        padding: 0;
+      }
+      .question {
+        margin-bottom: 5rem;
+      }
+      .question span {
+        font-size: 24px;
+        font-weight: 700;
+      }
+      .question-prompt {
+        margin-top: 0.8rem;
+        font-weight: 700;
+      }
+      .question-answer {
+        margin-top: 1.6rem;
+        padding-left: 0;
+        box-sizing: border-box;
+      }
+      .question-answer label {
+        max-width: 80rem;
+        position: relative;
+        cursor: pointer;
+        display: flex;
+        min-width: 18rem;
+        border: solid #1c1d1f 2px;
+      }
+      .question-answer div {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem;
+        width: 100%;
+      }
+      .question-answer div:hover {
+        background-color: #f5f5f5;
+      }
+      .question-answer input {
+        display: none;
+      }
+      .question-answer span {
+        width: 1rem;
+        height: 1rem;
+        margin-right: 1.6rem;
+        top: 0;
+        border-radius: 50%;
+        display: inline-block;
+        flex-shrink: 0;
+        border: 0.2rem solid #1c1d1f;
+        position: relative;
+      }
+      .selected {
+        background: #1c1d1f;
+        box-shadow: 0 0 0 0.4rem #fff inset;
+      }
+      .score {
+              position: fixed;
+            }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <div id="score" class="score">
+      <span>Score: N/A of N/A</span>
+    </div>
+    <div id="quiz-container" class="quiz-content"></div>
+
+    <script>
+      const quizData = {"pass_percent": 70, "questions": [{"_class": "assessment", "id": 47054470, "assessment_type": "multiple-choice", "prompt": {"question": "<p>What data type is the value below?</p><p><code>\"John&nbsp;Smith\"</code> </p>", "relatedLectureIds": "", "feedbacks": ["Yes, this is a string because it starts and ends with double quotes.", "This is not a list. A list starts and ends with square brackets [].", "There is no such type as \"person name\". Python data types are strings, lists, etc."], "answers": ["<p>String data type</p>", "<p>List data type</p>", "<p>Person name data type</p>"]}, "correct_response": ["a"], "section": "", "question_plain": "What data type is the value below?\"John&nbsp;Smith\"", "related_lectures": []}, {"_class": "assessment", "id": 47054492, "assessment_type": "multiple-choice", "prompt": {"question": "<p>What is the data type of the value referenced by the <code>groceries</code> variable?</p><p><code>groceries&nbsp;=&nbsp;[\"apples\",&nbsp;\"bread\",&nbsp;\"tomatoes\"]</code> </p>", "relatedLectureIds": "", "feedbacks": ["The variable is associated with a list. The list itself contains strings, but the variable itself is referenced to the list.", "There is no such thing as \"variable data type\". Data types are object types such as strings and lists. Variables are just names attached to those objects.", "The object referenced by the variable is a list because it starts and ends with square brackets."], "answers": ["<p>String data type</p>", "<p>Variable data type</p>", "<p>List data type</p>"]}, "correct_response": ["c"], "section": "", "question_plain": "What is the data type of the value referenced by the groceries variable?groceries&nbsp;=&nbsp;[\"apples\",&nbsp;\"bread\",&nbsp;\"tomatoes\"]", "related_lectures": []}, {"_class": "assessment", "id": 47054516, "assessment_type": "multiple-choice", "prompt": {"question": "<p>What would the output of the code below be? Please, try to answer without running the code on your computer IDE.</p><pre class=\"prettyprint linenums\">todo1&nbsp;=&nbsp;\"Clean&nbsp;the&nbsp;bag.\"\ntodo2&nbsp;=&nbsp;\"Clean&nbsp;the&nbsp;bag.\"\nprint(todo1)\nprint(todo2)</pre>", "relatedLectureIds": "", "feedbacks": ["We have two print functions in the code. Therefore, we will also have two lines printed out.", "The program contains two print functions, each of them printing out the text \"Clean the bag.\" so we will have two lines printed out.", "The print function always prints out the value referenced by the variable, not the variable itself. The variable is just a name used internally by the programmer and it is not meant to be printed out as an output for the user."], "answers": ["<p>Clean the bag.</p><p>Clean the bag.</p>", "<p>Clean the bag.</p>", "<p>todo1</p><p>todo2</p>"]}, "correct_response": ["a"], "section": "", "question_plain": "What would the output of the code below be? Please, try to answer without running the code on your computer IDE.todo1&nbsp;=&nbsp;\"Clean&nbsp;the&nbsp;bag.\"\ntodo2&nbsp;=&nbsp;\"Clean&nbsp;the&nbsp;bag.\"\nprint(todo1)\nprint(todo2)", "related_lectures": []}, {"_class": "assessment", "id": 47054534, "assessment_type": "multiple-choice", "prompt": {"question": "<p>What would the output of the code below be? Please, try to answer without running the code on your computer IDE.</p><p><code>print(type([\"Hello\"]))</code> </p>", "relatedLectureIds": "", "feedbacks": ["The type function is checking the type of [\"Hello\"] which is a list type since it starts and ends with square brackets. ", "The type function is checking the type of [\"Hello\"] which is a list type since it starts and ends with square brackets.  ", "Yes, the value inside the type function is a list since it starts and ends with square brackets. Therefore, the output will be ."], "answers": ["<p>&lt;class 'str'&gt;</p>", "<p>&lt;class 'type'&gt;</p>", "<p>&lt;class 'list'&gt;</p>"]}, "correct_response": ["c"], "section": "", "question_plain": "What would the output of the code below be? Please, try to answer without running the code on your computer IDE.print(type([\"Hello\"]))", "related_lectures": []}, {"_class": "assessment", "id": 47054544, "assessment_type": "multiple-choice", "prompt": {"question": "<p>Which of the lines below would produce an error? Please, try to answer without running the code on your computer IDE.</p>", "relatedLectureIds": "", "feedbacks": ["The syntax here is correct. No errors would be produced by running this code.", "The syntax here is correct. No errors would be produced by running this code.", "There is a space in the variable name here. Therefore, the code will produce an error.", "The syntax here is correct. No errors would be produced by running this code.", "This is not true. Option 3 would produce an error because there is a space in the variable name (between \"greeting\" and \"3\")."], "answers": ["<p>greeting = \"Hello There\"</p>", "<p>greeting2 = \"Hi there\"</p>", "<p>greeting&nbsp; 3 = \"Hello, good sir!\"</p>", "<p>greeting_4 = \"Hi, bumble!\"</p>", "<p>None of the above</p>"]}, "correct_response": ["c"], "section": "", "question_plain": "Which of the lines below would produce an error? Please, try to answer without running the code on your computer IDE.", "related_lectures": []}]};
+      var correct = 0;
+      var total = 0;
+      const questionData = quizData.questions
+      const passPercent = quizData.pass_percent
+
+      function main() {
+        total = questionData.length;
+
+        var questions = [];
+        for (var i = 0; i < questionData.length; i++) {
+          var question = questionData[i];
+          var questionText = question.prompt.question;
+          var answers = question.prompt.answers;
+          var correctAnswer = question.correct_response[0];
+          var correctAnswerText = answers[correctAnswer.charCodeAt(0) - 97];
+          var questionObj = {
+            question: questionText,
+            correctAnswer: correctAnswerText,
+            answers: answers,
+            id: question.id,
+          };
+          questions.push(questionObj);
+        }
+
+        updateScore();
+
+        // display the questions
+        var questionsContainer = document.getElementById("quiz-container");
+        for (var i = 0; i < questions.length; i++) {
+          var question = questions[i];
+          var questionElement = document.createElement("form");
+          questionElement.className = "question";
+          questionElement.innerHTML =
+            "<span>Question " +
+            (i + 1) +
+            ":</span>" +
+            '<div class="question-prompt">' +
+            question.question +
+            "</div>";
+          questionElement.id = question.id;
+          questionElement.classList.add("quiz-container");
+          var answersElement = document.createElement("ul");
+          answersElement.className = "answers";
+          for (var j = 0; j < question.answers.length; j++) {
+            var answer = question.answers[j];
+            var answerElement = document.createElement("li");
+            answerElement.className = "answer";
+            answerElement.innerHTML =
+              '<label for="input-' +
+              question.id +
+              "-" +
+              j +
+              '"><div onclick="select(' +
+              question.id +
+              ", " +
+              j +
+              ')"><span></span><input id="input-' +
+              question.id +
+              "-" +
+              j +
+              '" type="radio" name="question' +
+              i +
+              '" value="' +
+              j +
+              '">' +
+              answer +
+              "</input></div></label>";
+            answerElement.classList.add("question-answer");
+            answersElement.appendChild(answerElement);
+          }
+
+          questionElement.appendChild(answersElement);
+
+          // add a submit button
+          var submitButton = document.createElement("button");
+          submitButton.className = "submit";
+          submitButton.innerHTML = "Submit";
+          submitButton.classList.add("submit-button");
+
+          submitButton.addEventListener("click", function (e) {
+            e.preventDefault();
+            var questionElement = e.target.parentElement;
+            var questionId = questionElement.id;
+            var question = questions.filter(function (q) {
+              return q.id == questionId;
+            })[0];
+
+            // set the border color of all answers to black
+            var answers = questionElement.getElementsByClassName("answer");
+            for (var i = 0; i < answers.length; i++) {
+              console.log(answers[i]);
+              answers[i].children[0].style.borderColor = "#1c1d1f";
+            }
+
+            var answer = questionElement.querySelector(
+              'input[type="radio"]:checked'
+            );
+            if (answer) {
+              var answerIndex = answer.value;
+              var answerText = question.answers[answerIndex];
+              if (answerText == question.correctAnswer) {
+                answer.parentElement.parentElement.style.borderColor =
+                  "limegreen";
+                // alert("Correct!");
+                correct++;
+                updateScore();
+              } else {
+                answer.parentElement.parentElement.style.borderColor = "red";
+                // alert("Incorrect!");
+              }
+            } else {
+              alert("Please select an answer.");
+            }
+          });
+
+          // add button
+          questionElement.appendChild(submitButton);
+
+          questionsContainer.appendChild(questionElement);
+        }
+      }
+
+      function select(question, answer) {
+        var questionElement = document.getElementById(question);
+        var answers = questionElement.getElementsByClassName("answer");
+        for (var i = 0; i < answers.length; i++) {
+          var span = answers[i].children[0].children[0].children[0];
+          var input = answers[i].children[0].children[0].children[1];
+          span.classList.remove("selected");
+          input.checked = false;
+        }
+        var span = answers[answer].children[0].children[0].children[0];
+        var input = answers[answer].children[0].children[0].children[1];
+        span.classList.add("selected");
+        input.checked = true;
+      }
+
+      function updateScore() {
+        var scoreElem = document.getElementById("score");
+        const score = (correct / total) * 100;
+        scoreElem.innerHTML = "Score: " + score + "/" + passPercent + "%";
+      }
+    </script>
+  </body>
+</html>
