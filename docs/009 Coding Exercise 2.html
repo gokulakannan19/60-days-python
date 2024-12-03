@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "009 Coding Exercise 2", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p>Complete the code by adding a <strong>for-loop</strong> that makes the program produce the following output:</p><p><img src=\"https://img-c.udemycdn.com/redactor/raw/article_lecture/2022-05-08_14-35-29-3b1b0b6d9929ca1a24320c90784de6fb.png\"></p>", "tests": [{"file_name": "evaluate.py", "content": "import re\nimport sys\nfrom unittest import TestCase\nimport traceback\n\n\nclass Evaluate(TestCase):\n        def test_exercise(self):\n                    \n            def check_variable():\n                import exercise\n                \"\"\"For code that contains variables which should be checked if they exist and what they contain\"\"\"\n                if not hasattr(exercise, \"members\"):\n                    sys.exit(\"You must define 'members'\")\n                \n                if not isinstance(exercise.members, list):\n                    sys.exit(f\"'members' should be a list, not a {type(exercise.members)}\")\n            \n            def check_print_missing():\n                \"\"\"For code that contain print function to check if the user forgots to include print() \"\"\"\n                with open(\"exercise.py\") as file:\n                    content = file.read()\n                check1 = re.compile(\"print\\(.*\").search(content) #check number print(15.56)\n                \n                if check1:\n                    pass\n                else:\n                    sys.exit(\"It looks like there is no print() function in your code. Did you forget to print out the output?\" )\n            \n            def check_print_output():\n                \"\"\"Compare expected output with user's printed output for exercises that require print()\"\"\"\n                import exercise  # Imports student's solution\n                user_output = sys.stdout.getvalue().strip()                    \n                correct_output = \"John Smith\\nSen Plakay\\nDora Ngacely\"\n                message_output = \"\\n\\nYour code returned:\\n{} \\n\\nInstead, it should have returned:\\n{}\".format(user_output, correct_output)\n                if user_output == correct_output:\n                    pass\n                else:\n                    sys.exit(message_output)\n            \n            check_variable()\n            check_print_missing()\n            check_print_output()\n\n"}], "solutions": [{"file_name": "exercise.py", "content": "members = [\"john smith\", \"sen plakay\", \"dora ngacely\"]\n\nfor i in members:\n    print(i.title())"}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>

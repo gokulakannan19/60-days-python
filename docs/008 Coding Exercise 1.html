@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "008 Coding Exercise 1", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p>In the coding area, we have defined a <code>country</code> variable. </p><p>You should write a match-case block that checks the value of the <code>country</code> variable and:</p><p><strong>Prints</strong> out <code>Hello</code> if the value of <code>country</code> is \"USA\".</p><p><strong>Prints</strong> out <code>Namaste</code> if the value of <code>country</code> is \"India\".</p><p><strong>Prints</strong> out <code>Hallo</code> if the value of <code>country</code> is \"Germany\".</p><p><br></p>", "tests": [{"file_name": "evaluate.py", "content": "import re\nimport sys\nfrom io import StringIO\nfrom unittest import TestCase\n\n\nclass Evaluate(TestCase):\n    def test_exercise(self):\n        def check_variable():\n            import exercise\n            \"\"\"Check if the required variables are defined and have the correct types\"\"\"\n            if not hasattr(exercise, \"country\"):\n                sys.exit(\"You must define the 'country' variable.\")\n\n            if not isinstance(exercise.country, str):\n                sys.exit(f\"'country' should be a string, not a {type(exercise.country)}.\")\n\n        def check_print_missing():\n            \"\"\"Check if the print function is used\"\"\"\n            with open(\"exercise.py\") as file:\n                content = file.read()\n            if \"print\" not in content:\n                sys.exit(\"It looks like there is no print() function in your code. Did you forget to print out the output?\")\n        \n        def check_three_cases():\n            \"\"\"Verify there are three cases\"\"\"\n            with open(\"exercise.py\") as file:\n                content = file.read()\n            count = content.count(\"case\")\n            if not count >= 3:\n                sys.exit('You should have three \"case\" statements in your code. ')\n\n        def check_print_output():\n            \"\"\"Compare expected output with the student's printed output\"\"\"\n            import exercise  # Imports student's solution\n\n            # Redirect stdout to capture the printed output\n            original_stdout = sys.stdout\n            sys.stdout = captured_output = StringIO()\n\n            # Execute the code\n            exec(open(\"exercise.py\").read())\n\n            # Get the student's printed output and expected output\n            student_output = captured_output.getvalue().strip()\n            \n            expected_output = \"Namaste\"\n\n            # Compare the outputs\n            if student_output != expected_output:\n                sys.exit(f\"Your code returned:\\n{student_output}\\n\\nInstead, it should have returned:\\n{expected_output}\")\n\n            # Restore original stdout\n            sys.stdout = original_stdout\n\n        check_variable()\n        check_print_missing()\n        check_three_cases()\n        check_print_output()\n\n"}], "solutions": [{"file_name": "exercise.py", "content": "country = \"India\"\n\nmatch country:\n    case \"USA\":\n        print(\"Hello\")\n    case \"India\":\n        print(\"Namaste\")\n    case \"Germany\":\n        print(\"Hallo\")\n"}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>
