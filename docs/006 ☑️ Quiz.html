@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      ul,
+      ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      code {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .quiz-content {
+        padding: 2.4rem;
+        word-break: break-word;
+        max-width: 86rem;
+        margin: 0 auto;
+      }
+      .quiz-container {
+        margin: 0 auto;
+        max-width: 84rem;
+        padding: 0;
+      }
+      .question {
+        margin-bottom: 5rem;
+      }
+      .question span {
+        font-size: 24px;
+        font-weight: 700;
+      }
+      .question-prompt {
+        margin-top: 0.8rem;
+        font-weight: 700;
+      }
+      .question-answer {
+        margin-top: 1.6rem;
+        padding-left: 0;
+        box-sizing: border-box;
+      }
+      .question-answer label {
+        max-width: 80rem;
+        position: relative;
+        cursor: pointer;
+        display: flex;
+        min-width: 18rem;
+        border: solid #1c1d1f 2px;
+      }
+      .question-answer div {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem;
+        width: 100%;
+      }
+      .question-answer div:hover {
+        background-color: #f5f5f5;
+      }
+      .question-answer input {
+        display: none;
+      }
+      .question-answer span {
+        width: 1rem;
+        height: 1rem;
+        margin-right: 1.6rem;
+        top: 0;
+        border-radius: 50%;
+        display: inline-block;
+        flex-shrink: 0;
+        border: 0.2rem solid #1c1d1f;
+        position: relative;
+      }
+      .selected {
+        background: #1c1d1f;
+        box-shadow: 0 0 0 0.4rem #fff inset;
+      }
+      .score {
+              position: fixed;
+            }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <div id="score" class="score">
+      <span>Score: N/A of N/A</span>
+    </div>
+    <div id="quiz-container" class="quiz-content"></div>
+
+    <script>
+      const quizData = {"pass_percent": 70, "questions": [{"_class": "assessment", "id": 47341124, "assessment_type": "multiple-choice", "prompt": {"question": "<p>Why doesn't the with-context manager have a <code>close()</code> method?</p>", "relatedLectureIds": "", "feedbacks": ["Closing a file is also quite necessary in certain code scenarios.", "Yes, once the block of code indented under the with-line executes, the close() method gets executed implicitly/hiddenly."], "answers": ["<p>Because closing a file is not necessary.</p>", "<p>Because the with-context manager executes the <code>close() </code>method under the hood.</p>"]}, "correct_response": ["b"], "section": "", "question_plain": "Why doesn't the with-context manager have a close() method?", "related_lectures": []}, {"_class": "assessment", "id": 47341194, "assessment_type": "multiple-choice", "prompt": {"question": "<p>When the interpreter runs the <code>read()&nbsp;</code>method more than one time, the method returns the content of the file only the first time because:</p>", "relatedLectureIds": "", "feedbacks": ["The read() method can only view the content of the file. It can never modify it.", "Yes, the first read() method will put the cursor at the end of the text file.", "No, this is not related to how Python handles strings. This has to do with how text files are handled."], "answers": ["<p>The text is deleted from the text file after the first <code>read()</code>&nbsp;method executes.</p>", "<p>The cursor moves at the end of the file after the first <code>read() </code>method executes.</p>", "<p>Python deletes strings as soon as it creates them.</p>"]}, "correct_response": ["b"], "section": "", "question_plain": "When the interpreter runs the read()&nbsp;method more than one time, the method returns the content of the file only the first time because:", "related_lectures": []}, {"_class": "assessment", "id": 47341262, "assessment_type": "multiple-choice", "prompt": {"question": "<p>What would be the content of the text file if you were to run the code below? </p><pre class=\"prettyprint linenums\">with open(\"file.txt\", 'w') as file:\n    file.write(\"Hello\")\n    \nwith open(\"file.txt\", 'w') as file:\n    file.write(\"Hi\")</pre>", "relatedLectureIds": "", "feedbacks": ["Good one! This is correct because the second open function will overwrite the file created by the first open function.", "This is not true because we are also writing the string \"Hi\".", "This is not true because the second open function will overwrite the file created by the first open function and it will write the string \"Hi\" from scratch.", "This is not true because the second open function will overwrite the file created by the first open function and it will write the string \"Hi\" from scratch."], "answers": ["<p>Hi</p>", "<p>Hello</p>", "<p>Hello</p><p>Hi</p>", "<p>HelloHi</p>"]}, "correct_response": ["a"], "section": "", "question_plain": "What would be the content of the text file if you were to run the code below? with open(\"file.txt\", 'w') as file:\n    file.write(\"Hello\")\n    \nwith open(\"file.txt\", 'w') as file:\n    file.write(\"Hi\")", "related_lectures": []}, {"_class": "assessment", "id": 47341382, "assessment_type": "multiple-choice", "prompt": {"question": "<p>What would be the content of the file this time if you were to run the code below?</p><pre class=\"prettyprint linenums\">with open(\"file.txt\", 'w') as file:\n    file.write(\"Hello\")\n    file.write(\"Hi\")</pre>", "relatedLectureIds": "", "feedbacks": ["This is not true because we are also writing the string \"Hello\" in the same opened file.", "This is not true because we are also writing the string \"Hi\" in the same opened file.", "This is not correct because there is no break line between the two strings. This output would be only generated if we had \"file.write(\"Hello\\n\")\" in the second line.", "Great! This is true because we are opening the file once and writing two strings into that file consecutively."], "answers": ["<p>Hi</p>", "<p>Hello</p>", "<p>Hello</p><p>Hi</p>", "<p>HelloHi</p>"]}, "correct_response": ["d"], "section": "", "question_plain": "What would be the content of the file this time if you were to run the code below?with open(\"file.txt\", 'w') as file:\n    file.write(\"Hello\")\n    file.write(\"Hi\")", "related_lectures": []}]};
+      var correct = 0;
+      var total = 0;
+      const questionData = quizData.questions
+      const passPercent = quizData.pass_percent
+
+      function main() {
+        total = questionData.length;
+
+        var questions = [];
+        for (var i = 0; i < questionData.length; i++) {
+          var question = questionData[i];
+          var questionText = question.prompt.question;
+          var answers = question.prompt.answers;
+          var correctAnswer = question.correct_response[0];
+          var correctAnswerText = answers[correctAnswer.charCodeAt(0) - 97];
+          var questionObj = {
+            question: questionText,
+            correctAnswer: correctAnswerText,
+            answers: answers,
+            id: question.id,
+          };
+          questions.push(questionObj);
+        }
+
+        updateScore();
+
+        // display the questions
+        var questionsContainer = document.getElementById("quiz-container");
+        for (var i = 0; i < questions.length; i++) {
+          var question = questions[i];
+          var questionElement = document.createElement("form");
+          questionElement.className = "question";
+          questionElement.innerHTML =
+            "<span>Question " +
+            (i + 1) +
+            ":</span>" +
+            '<div class="question-prompt">' +
+            question.question +
+            "</div>";
+          questionElement.id = question.id;
+          questionElement.classList.add("quiz-container");
+          var answersElement = document.createElement("ul");
+          answersElement.className = "answers";
+          for (var j = 0; j < question.answers.length; j++) {
+            var answer = question.answers[j];
+            var answerElement = document.createElement("li");
+            answerElement.className = "answer";
+            answerElement.innerHTML =
+              '<label for="input-' +
+              question.id +
+              "-" +
+              j +
+              '"><div onclick="select(' +
+              question.id +
+              ", " +
+              j +
+              ')"><span></span><input id="input-' +
+              question.id +
+              "-" +
+              j +
+              '" type="radio" name="question' +
+              i +
+              '" value="' +
+              j +
+              '">' +
+              answer +
+              "</input></div></label>";
+            answerElement.classList.add("question-answer");
+            answersElement.appendChild(answerElement);
+          }
+
+          questionElement.appendChild(answersElement);
+
+          // add a submit button
+          var submitButton = document.createElement("button");
+          submitButton.className = "submit";
+          submitButton.innerHTML = "Submit";
+          submitButton.classList.add("submit-button");
+
+          submitButton.addEventListener("click", function (e) {
+            e.preventDefault();
+            var questionElement = e.target.parentElement;
+            var questionId = questionElement.id;
+            var question = questions.filter(function (q) {
+              return q.id == questionId;
+            })[0];
+
+            // set the border color of all answers to black
+            var answers = questionElement.getElementsByClassName("answer");
+            for (var i = 0; i < answers.length; i++) {
+              console.log(answers[i]);
+              answers[i].children[0].style.borderColor = "#1c1d1f";
+            }
+
+            var answer = questionElement.querySelector(
+              'input[type="radio"]:checked'
+            );
+            if (answer) {
+              var answerIndex = answer.value;
+              var answerText = question.answers[answerIndex];
+              if (answerText == question.correctAnswer) {
+                answer.parentElement.parentElement.style.borderColor =
+                  "limegreen";
+                // alert("Correct!");
+                correct++;
+                updateScore();
+              } else {
+                answer.parentElement.parentElement.style.borderColor = "red";
+                // alert("Incorrect!");
+              }
+            } else {
+              alert("Please select an answer.");
+            }
+          });
+
+          // add button
+          questionElement.appendChild(submitButton);
+
+          questionsContainer.appendChild(questionElement);
+        }
+      }
+
+      function select(question, answer) {
+        var questionElement = document.getElementById(question);
+        var answers = questionElement.getElementsByClassName("answer");
+        for (var i = 0; i < answers.length; i++) {
+          var span = answers[i].children[0].children[0].children[0];
+          var input = answers[i].children[0].children[0].children[1];
+          span.classList.remove("selected");
+          input.checked = false;
+        }
+        var span = answers[answer].children[0].children[0].children[0];
+        var input = answers[answer].children[0].children[0].children[1];
+        span.classList.add("selected");
+        input.checked = true;
+      }
+
+      function updateScore() {
+        var scoreElem = document.getElementById("score");
+        const score = (correct / total) * 100;
+        scoreElem.innerHTML = "Score: " + score + "/" + passPercent + "%";
+      }
+    </script>
+  </body>
+</html>
