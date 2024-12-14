@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "007 Coding Exercise 1", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p>The given code is incomplete. Your task is to continue that program. You need to:</p><p>1. <strong>calculate</strong> the percentage using the&nbsp; <code>value/total *&nbsp;100</code> formula </p><p>2. <strong>print</strong> out, for example, \"<strong>That is 40.0%</strong>\" as shown in the sample below:</p><p><img src=\"https://img-c.udemycdn.com/redactor/raw/article_lecture/2022-05-19_15-29-56-fd7d01ef956829505d381e2e9f53f9f8.png\"></p><p>The program should also print a message if the user doesn't enter a <strong>number</strong> for the \"total value or for the \"value\":</p><p><img src=\"https://img-c.udemycdn.com/redactor/raw/article_lecture/2022-05-19_15-29-56-dae220f28bd1004208489ed4542e9e6a.png\"></p><p><br></p>", "tests": [{"file_name": "evaluate.py", "content": "import sys\nfrom unittest import TestCase\n\nclass Evaluate(TestCase):\n    def test_exercise(self):\n        total_input = \"100\\n\"  # Set a mock input for the `input()` function\n        value_input = \"50\\n\"  # Set a mock input for the `input()` function\n        expected_output = \"That is 50.0%\\n\"\n\n        def mock_input(*args):\n            if \"total value\" in args[0]:\n                return total_input\n            elif \"value\" in args[0]:\n                return value_input\n            else:\n                return \"\"  # Return an empty string for unrecognized prompt messages\n\n        import builtins\n        original_input = builtins.input\n        try:\n            # Replace the `input()` function with the mock_input() function\n            builtins.input = mock_input\n            import exercise\n\n            # Capture the printed output\n            user_output = sys.stdout.getvalue()\n        except Exception:\n            import traceback\n            extracted_exception = traceback.format_exc().splitlines()[3:]\n            traceback_string = ''\n            for line in extracted_exception:\n                if r'/eval/' in line:\n                    line = line.replace(r'/eval/', '')\n                traceback_string = traceback_string + line + \"\\n\"\n            sys.exit(traceback_string)\n        finally:\n            builtins.input = original_input  # Restore the original `input()` function\n\n        self.check_output(expected_output, user_output)\n\n    def check_output(self, expected_output, user_output):\n        message_output = f\"\\n\\nYour code printed {user_output}, but the expected output is {expected_output}. Please check again!\"\n        if user_output == expected_output:\n            pass\n        else:\n            sys.exit(message_output)\n\n"}], "solutions": [{"file_name": "exercise.py", "content": "try:\n    total_value = float(input(\"Enter total value: \"))\n    value = float(input(\"Enter value: \"))\n    percentage = value / total_value * 100\n    print(f\"That is {percentage}%\")\nexcept ValueError:\n    print(\"You need to enter a number. Run the program again.\")\n"}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>
