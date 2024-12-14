@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      ul,
+      ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      code {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .quiz-content {
+        padding: 2.4rem;
+        word-break: break-word;
+        max-width: 86rem;
+        margin: 0 auto;
+      }
+      .quiz-container {
+        margin: 0 auto;
+        max-width: 84rem;
+        padding: 0;
+      }
+      .question {
+        margin-bottom: 5rem;
+      }
+      .question span {
+        font-size: 24px;
+        font-weight: 700;
+      }
+      .question-prompt {
+        margin-top: 0.8rem;
+        font-weight: 700;
+      }
+      .question-answer {
+        margin-top: 1.6rem;
+        padding-left: 0;
+        box-sizing: border-box;
+      }
+      .question-answer label {
+        max-width: 80rem;
+        position: relative;
+        cursor: pointer;
+        display: flex;
+        min-width: 18rem;
+        border: solid #1c1d1f 2px;
+      }
+      .question-answer div {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem;
+        width: 100%;
+      }
+      .question-answer div:hover {
+        background-color: #f5f5f5;
+      }
+      .question-answer input {
+        display: none;
+      }
+      .question-answer span {
+        width: 1rem;
+        height: 1rem;
+        margin-right: 1.6rem;
+        top: 0;
+        border-radius: 50%;
+        display: inline-block;
+        flex-shrink: 0;
+        border: 0.2rem solid #1c1d1f;
+        position: relative;
+      }
+      .selected {
+        background: #1c1d1f;
+        box-shadow: 0 0 0 0.4rem #fff inset;
+      }
+      .score {
+              position: fixed;
+            }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <div id="score" class="score">
+      <span>Score: N/A of N/A</span>
+    </div>
+    <div id="quiz-container" class="quiz-content"></div>
+
+    <script>
+      const quizData = {"pass_percent": 70, "questions": [{"_class": "assessment", "id": 47458886, "assessment_type": "multiple-choice", "prompt": {"question": "<p>What would the following code print out if you were to execute it?</p><pre class=\"prettyprint linenums\">def get_average():\n    x = \"hello\"\n    return x.capitalize()\n\n\nprint(get_average())</pre>", "relatedLectureIds": "", "feedbacks": ["This is the right answer. The function will capitalize the first letter of \"hello\" and return it. Then, in the last line, we print out that output.", "This is not true. The code will print out the value that the function returns. That value is \"Hello\".", "The code is perfectly fine. No error messages would be produced."], "answers": ["<p>Hello</p>", "<p>The code would print out nothing.</p>", "<p><code>SyntaxError: There is a missing \":\" at the end of \"def get_average()\"</code> </p>"]}, "correct_response": ["a"], "section": "", "question_plain": "What would the following code print out if you were to execute it?def get_average():\n    x = \"hello\"\n    return x.capitalize()\n\n\nprint(get_average())", "related_lectures": []}, {"_class": "assessment", "id": 47458920, "assessment_type": "multiple-choice", "prompt": {"question": "<p>What would the following code print out this time you were to execute it?</p><pre class=\"prettyprint linenums\">def get_average():\n    x = \"hello\"\n    return x.capitalize()</pre>", "relatedLectureIds": "", "feedbacks": ["The code could print out its output only if the function was called. In this script, we only have the function definition, but not the function call.", "This is true. The script contains a function definition, but no function call.", "The function capitalizes the first letter of \"hello\", and then returns \"Hello\". Therefore, \"hello\" is not the right answer here."], "answers": ["<p>Hello</p>", "<p>The code would print out nothing.</p>", "<p>hello</p>"]}, "correct_response": ["b"], "section": "", "question_plain": "What would the following code print out this time you were to execute it?def get_average():\n    x = \"hello\"\n    return x.capitalize()", "related_lectures": []}, {"_class": "assessment", "id": 47458978, "assessment_type": "multiple-choice", "prompt": {"question": "<p>How about this time?&nbsp;What would the following code print out if you were to execute it?</p><pre class=\"prettyprint linenums\">def get_average():\n    x = \"hello\"\n    return x.capitalize()\n    \nget_average()</pre>", "relatedLectureIds": "", "feedbacks": ["This is not the right answer. The last line calls the function to get its output but that output is not printed out anywhere in the code. Only if the last line was \"print(get_average())\" instead of just \"get_average()\" would we get \"Hello\" printed out.", "This is the correct answer. While we're calling the function in the last line, we are not printing out its's output anywhere. ", "We don't really have a \"print(\"Hi\")\" line in the code, so there will not be any such output."], "answers": ["<p>Hello</p>", "<p>The code would print out nothing.</p>", "<p>Hi</p>"]}, "correct_response": ["b"], "section": "", "question_plain": "How about this time?&nbsp;What would the following code print out if you were to execute it?def get_average():\n    x = \"hello\"\n    return x.capitalize()\n    \nget_average()", "related_lectures": []}, {"_class": "assessment", "id": 47458990, "assessment_type": "multiple-choice", "prompt": {"question": "<p>Once more!&nbsp;What would the following function print out if you were to execute it?</p><pre class=\"prettyprint linenums\">def get_average():\n    print(\"Hi\")\n    x = \"hello\"\n    return x.capitalize()\n    \nget_average()</pre>", "relatedLectureIds": "", "feedbacks": ["\"Hello\" is the output returned by the function but that output would be printed out only if we had \"print(get_average())\" instead of just \"get_average()\" in the last line.", "This is not true. It's true that in the last line we are not printing out the function call. We are merely calling it. However, when we call the function, the print(\"Hi\") line will be executed, and thus, \"Hi\" will be printed out.", "This is correct because we have a \"print(\"Hi\")\" line in the function definition."], "answers": ["<p>Hello</p>", "<p>The code would print out nothing.</p>", "<p>Hi</p>"]}, "correct_response": ["c"], "section": "", "question_plain": "Once more!&nbsp;What would the following function print out if you were to execute it?def get_average():\n    print(\"Hi\")\n    x = \"hello\"\n    return x.capitalize()\n    \nget_average()", "related_lectures": []}, {"_class": "assessment", "id": 47459356, "assessment_type": "multiple-choice", "prompt": {"question": "<p>Last one! What will the following code execute if you were to execute it?</p><pre class=\"prettyprint linenums\">def get_average():\n    print(\"Hi\")\n    x = \"hello\"\n    \nprint(get_average())</pre>", "relatedLectureIds": "", "feedbacks": ["Nowhere in the code we are producing or printing out a \"Hello\" string. Therefore, this is not the correct answer.", "It's true that \"Hi\" will be printed out but, the function output will also be printed out. In this example, the function returns \"None\". Therefore, in addition to \"Hi\", \"None\" is also printed out.", "Nowhere in the code we are producing or printing out a \"Hello\" string. Therefore, this is not the correct answer.", "This is the correct answer. \"Hi\" is printed out by \"print(\"Hi\")\" and \"None\" is returned implicitly by the function and printed out by the last line.", "It's fine for a function not to have a \"return\" statement. Therefore, this is not the correct answer."], "answers": ["<p>Hello</p>", "<p>Hi</p>", "<p>Hi</p><p>Hello</p>", "<p>Hi</p><p>None</p>", "<p>SyntaxError:&nbsp;The function is missing the \"return\" statement.</p>"]}, "correct_response": ["d"], "section": "", "question_plain": "Last one! What will the following code execute if you were to execute it?def get_average():\n    print(\"Hi\")\n    x = \"hello\"\n    \nprint(get_average())", "related_lectures": []}]};
+      var correct = 0;
+      var total = 0;
+      const questionData = quizData.questions
+      const passPercent = quizData.pass_percent
+
+      function main() {
+        total = questionData.length;
+
+        var questions = [];
+        for (var i = 0; i < questionData.length; i++) {
+          var question = questionData[i];
+          var questionText = question.prompt.question;
+          var answers = question.prompt.answers;
+          var correctAnswer = question.correct_response[0];
+          var correctAnswerText = answers[correctAnswer.charCodeAt(0) - 97];
+          var questionObj = {
+            question: questionText,
+            correctAnswer: correctAnswerText,
+            answers: answers,
+            id: question.id,
+          };
+          questions.push(questionObj);
+        }
+
+        updateScore();
+
+        // display the questions
+        var questionsContainer = document.getElementById("quiz-container");
+        for (var i = 0; i < questions.length; i++) {
+          var question = questions[i];
+          var questionElement = document.createElement("form");
+          questionElement.className = "question";
+          questionElement.innerHTML =
+            "<span>Question " +
+            (i + 1) +
+            ":</span>" +
+            '<div class="question-prompt">' +
+            question.question +
+            "</div>";
+          questionElement.id = question.id;
+          questionElement.classList.add("quiz-container");
+          var answersElement = document.createElement("ul");
+          answersElement.className = "answers";
+          for (var j = 0; j < question.answers.length; j++) {
+            var answer = question.answers[j];
+            var answerElement = document.createElement("li");
+            answerElement.className = "answer";
+            answerElement.innerHTML =
+              '<label for="input-' +
+              question.id +
+              "-" +
+              j +
+              '"><div onclick="select(' +
+              question.id +
+              ", " +
+              j +
+              ')"><span></span><input id="input-' +
+              question.id +
+              "-" +
+              j +
+              '" type="radio" name="question' +
+              i +
+              '" value="' +
+              j +
+              '">' +
+              answer +
+              "</input></div></label>";
+            answerElement.classList.add("question-answer");
+            answersElement.appendChild(answerElement);
+          }
+
+          questionElement.appendChild(answersElement);
+
+          // add a submit button
+          var submitButton = document.createElement("button");
+          submitButton.className = "submit";
+          submitButton.innerHTML = "Submit";
+          submitButton.classList.add("submit-button");
+
+          submitButton.addEventListener("click", function (e) {
+            e.preventDefault();
+            var questionElement = e.target.parentElement;
+            var questionId = questionElement.id;
+            var question = questions.filter(function (q) {
+              return q.id == questionId;
+            })[0];
+
+            // set the border color of all answers to black
+            var answers = questionElement.getElementsByClassName("answer");
+            for (var i = 0; i < answers.length; i++) {
+              console.log(answers[i]);
+              answers[i].children[0].style.borderColor = "#1c1d1f";
+            }
+
+            var answer = questionElement.querySelector(
+              'input[type="radio"]:checked'
+            );
+            if (answer) {
+              var answerIndex = answer.value;
+              var answerText = question.answers[answerIndex];
+              if (answerText == question.correctAnswer) {
+                answer.parentElement.parentElement.style.borderColor =
+                  "limegreen";
+                // alert("Correct!");
+                correct++;
+                updateScore();
+              } else {
+                answer.parentElement.parentElement.style.borderColor = "red";
+                // alert("Incorrect!");
+              }
+            } else {
+              alert("Please select an answer.");
+            }
+          });
+
+          // add button
+          questionElement.appendChild(submitButton);
+
+          questionsContainer.appendChild(questionElement);
+        }
+      }
+
+      function select(question, answer) {
+        var questionElement = document.getElementById(question);
+        var answers = questionElement.getElementsByClassName("answer");
+        for (var i = 0; i < answers.length; i++) {
+          var span = answers[i].children[0].children[0].children[0];
+          var input = answers[i].children[0].children[0].children[1];
+          span.classList.remove("selected");
+          input.checked = false;
+        }
+        var span = answers[answer].children[0].children[0].children[0];
+        var input = answers[answer].children[0].children[0].children[1];
+        span.classList.add("selected");
+        input.checked = true;
+      }
+
+      function updateScore() {
+        var scoreElem = document.getElementById("score");
+        const score = (correct / total) * 100;
+        scoreElem.innerHTML = "Score: " + score + "/" + passPercent + "%";
+      }
+    </script>
+  </body>
+</html>

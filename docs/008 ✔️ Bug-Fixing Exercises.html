@@ -1,0 +1,9 @@
+<h4><strong>Bug-Fixing Exercise 1</strong></h4><p>The following <code>get_maximum</code> function is designed to return the maximum value of the <code>celsius</code> list, while the <strong>last two lines </strong>of the code will convert the Celsius value to Fahrenheit and print it out.</p><pre class="prettyprint linenums">def get_maximum():
+    celsius = [14, 15.1, 12.3]
+    maximum = max(celsius)
+    print(maximum)
+    
+celsius = get_maximum()
+fahrenheit = celsius * 1.8 + 32
+
+print(fahrenheit)</pre><p>However, when running the code, the following error is generated:</p><p><code>TypeError: unsupported operand type(s) for *: 'NoneType' and 'float'</code></p><p>Try to fix the problem so that the last <strong>two lines</strong> can correctly get the maximal Celsius value from the function definition and convert that value to Fahrenheit.</p><p><a href="https://pythonhow.com/coding/d11b1/" rel="noopener noreferrer" target="_blank">Solution</a></p>
