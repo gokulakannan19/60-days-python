@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "010 Coding Exercise 4", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p>Define a function that:</p><p>(1) takes a temperature as a parameter</p><p>(2) returns <code>\"Warm\"</code> if the temperature is greater than 7</p><p>(3) returns <code>\"Cold\"</code> if the temperature is equal to or less than 7</p><p>If I&nbsp;called your function with <code>foo(10)</code> it would return <code>Warm</code>. If I&nbsp;called it with <code>foo(7)</code> or <code>foo(5)</code> it would return <code>Cold</code> in both cases, and so on.</p>", "tests": [{"file_name": "evaluate.py", "content": "import sys\nfrom unittest import TestCase\nimport string, random\n\n#This function is in the solutions script on Udemy\ndef foo(temperature):\n    if temperature > 7:\n        return \"Warm\"\n    else:\n        return \"Cold\"\n        \nclass Evaluate(TestCase):\n    def test_exercise(self):\n        \n        with open('exercise.py') as file:\n            execontent = file.read()\n        \n        if 'def' in execontent:\n            userdef = True\n        else:\n            userdef = False\n        \n        \n        self.assertEqual(True, userdef, 'No function was found in your code. You need to define a function.') \n        \n        import exercise  # Imports student's solution\n        method_string = [func for func in dir(exercise) \n\n        # get the name of the method written by students\n        if callable(getattr(exercise, func)) \n        and not func.startswith(\"_\")][0]\n        \n        # get the method object from the method string name\n        method_object = getattr(exercise, method_string)\n        \n        from inspect import signature\n        correct_parameters = len(signature(foo).parameters)\n        user_parameters = len(signature(method_object).parameters)\n        message_parameters = \"Your function has {} parameters. It should have {} parameter/s instead.\".format(user_parameters, correct_parameters)\n        \n        if correct_parameters == user_parameters:\n            pass\n        else:\n            sys.exit(message_parameters)\n\n        input_value = random.randint(1, 15)\n        #call the student method to get student output\n        import traceback, sys\n        try:\n            user_output = method_object(input_value)\n        except Exception:\n            extracted_exception = traceback.format_exc().splitlines()[3:]\n            traceback_string = ''\n            for line in extracted_exception:\n                if r'/eval/' in line:\n                    line = line.replace(r'/eval/', '')\n                traceback_string = traceback_string + line + \"\\n\"\n            sys.exit(traceback_string)\n\n        \n        # get the correct output\n        correct_output = foo(input_value)\n        \n        message_output = \"\\n\\nI called your function with {}('{}') and it returned:\\n{}\\n\\nInstead, your {} function should have returned:\\n{}\".format(method_string, input_value, user_output, method_string, correct_output)\n\n\n        if correct_output.lower() == user_output.lower():\n            pass\n        else:\n            sys.exit(message_output)\n"}], "solutions": [{"file_name": "exercise.py", "content": "def foo(temperature):\n    if temperature > 7:\n        return \"Warm\"\n    else:\n        return \"Cold\""}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>

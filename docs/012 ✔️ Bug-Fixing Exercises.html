@@ -1,0 +1,8 @@
+<h4>Bug-Fixing Exercise 1</h4><p>The following formula calculates the free-fall time of an object.</p><figure><img height="101" src="https://img-c.udemycdn.com/redactor/raw/article_lecture/2022-05-31_12-21-14-4dca7aa62afe1a1905b9e50135fb7261.png" width="152"></figure><p><code>h</code> is the free-fall distance and <code>g</code> is the gravity. On Earth, gravity is 9.80665 m/s2.</p><p>Given the above information, we have created a program that calculates the free-fall time given the free-fall distance <code>h</code> and the gravity <code>g</code> which will be a default parameter with a value of 9.80665:</p><pre class="prettyprint linenums">def calculate_time(g=9.80665, h):
+    t = (2 * h / g) ** 0.5
+    return t
+    
+  
+time = calculate_time(100)
+print(time)
+</pre><p>However, the script produces an error. Try running the script in your IDE and then fix the error so the program successfully calculates the free-fall time.</p><p><a href="https://pythonhow.com/coding/d13b1/" rel="noopener noreferrer" target="_blank">Solution</a></p>
