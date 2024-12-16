@@ -1,0 +1,13 @@
+<h4><strong>Bug-Fixing Exercise 1</strong></h4><p>The program depicted below consists of two Python files. The program tries to count and print out the number of periods in the <code>"Trees are good. Grass is green."</code> . However, running the main.py file returns an error. Please fix the error.</p><p>main.py:</p><pre class="prettyprint linenums">import functions
+
+nr_of_periods = count("Trees are good. Grass is green.")
+print(nr_of_periods)</pre><p><br></p><p>functions.py:</p><pre class="prettyprint linenums">def count(phrase):
+    return phrase.count('.')</pre><p><a href="https://pythonhow.com/coding/d14b1/" rel="noopener noreferrer" target="_blank">Solution</a></p><p><br></p><h4><strong>Bug-Fixing Exercise 2</strong></h4><p>The same program as in exercise 1 now is throwing yet another error. Hunt the error down and fix it.</p><p>main.py:</p><pre class="prettyprint linenums">import functions.py
+
+nr_of_periods = functions.count("Trees are good. Grass is green.")
+print(nr_of_periods)</pre><p><br></p><p>functions.py:</p><pre class="prettyprint linenums">def count(phrase):
+    return phrase.count('.')</pre><p><a href="https://pythonhow.com/coding/d14b2/" rel="noopener noreferrer" target="_blank">Solution</a></p><p><br></p><h4><strong>Bug-Fixing Exercise 3</strong></h4><p>There is another error in the same program. Please fix the error.</p><p>main.py:</p><pre class="prettyprint linenums">from functions import count
+
+nr_of_periods = functions.count("Trees are good. Grass is green.")
+print(nr_of_periods)</pre><p><br></p><p>functions.py:</p><pre class="prettyprint linenums">def count(phrase):
+    return phrase.count('.')</pre><p><a href="https://pythonhow.com/coding/d14b3/" rel="noopener noreferrer" target="_blank">Solution</a></p><p><br></p>

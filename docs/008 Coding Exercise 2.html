@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding Assignment</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p, ul, ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .code-snippet {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .code-block {
+        background-color: #fff;
+        color: #b4690e;
+        font-size: 90%;
+      }
+      .black-block {
+        color: #000000;
+      }
+      .italic-text {
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <h1 id="coding-title"></h1>
+    <div>
+      <h2>Instructions</h2>
+      <div id="coding-instructions"></div>
+    </div>
+    <div>
+      <h2>Test(s)</h2>
+      <div id="coding-tests"></div>
+    </div>
+    <div>
+      <h2>Solution(s)</h2>
+      <div id="coding-solutions"></div>
+    </div>
+
+    <script>
+      const quizData = {"title": "008 Coding Exercise 2", "hasInstructions": true, "hasTests": true, "hasSolutions": true, "instructions": "<p>In the previous exercise, we hardcoded the values 0 and 100. However, it is better to place those values in constants. Therefore, your task is to:</p><p>1. create a FREEZING_POINT and a BOILING_POINT variable and store the values 0 and 100 in them respectively.</p><p>2. modify the function of the previous exercise by using those variables instead of the hardcoded 0 and 100 values. The previous function is given in the code area.</p>", "tests": [{"file_name": "evaluate.py", "content": "import sys, re\nfrom unittest import TestCase\nfrom inspect import signature\nimport traceback\n\nclass Evaluate(TestCase):\n    def test_exercise(self):\n        with open('exercise.py') as file:\n            execontent = file.read()\n\n        # Check if the required global variables/constants are defined\n        self.assertIn(\"FREEZING_POINT =\", execontent, 'The global variable \"FREEZING_POINT\" is not defined.')\n        self.assertIn(\"BOILING_POINT =\", execontent, 'The global variable \"BOILING_POINT\" is not defined.')\n\n        # Extract the values of the global variables/constants\n        freezing_point = self.extract_constant(execontent, \"FREEZING_POINT\")\n        boiling_point = self.extract_constant(execontent, \"BOILING_POINT\")\n\n        # Check the values of the global variables/constants\n        self.assertEqual(freezing_point, 0, 'The value of \"FREEZING_POINT\" is incorrect.')\n        self.assertEqual(boiling_point, 100, 'The value of \"BOILING_POINT\" is incorrect.')\n\n        import exercise  # Imports student's solution\n        method_string = 'water_state'\n        method_object = getattr(exercise, method_string)\n\n        # Check the number of parameters in the function\n        correct_parameters = len(signature(method_object).parameters)\n        message_parameters = f\"Your function has {correct_parameters} parameter(s). It should have 1 parameter instead.\"\n\n        if correct_parameters == 1:\n            pass\n        else:\n            sys.exit(message_parameters)\n\n        # Test cases\n        test_cases = [\n            (-10,),\n            (50,),\n            (150,),\n        ]\n\n        for test_case in test_cases:\n            temperature = test_case[0]\n\n            # Call the student method to get student output\n            try:\n                user_output = method_object(temperature)\n            except Exception:\n                extracted_exception = traceback.format_exc().splitlines()[3:]\n                traceback_string = ''\n                for line in extracted_exception:\n                    if r'/eval/' in line:\n                        line = line.replace(r'/eval/', '')\n                    traceback_string = traceback_string + line + \"\\n\"\n                sys.exit(traceback_string)\n\n            # Check if the student's output is valid\n            if user_output not in [\"Solid\", \"Liquid\", \"Gas\"]:\n                sys.exit(f\"Your function returned an invalid output: {user_output}\")\n\n            # Call the solution method to get the correct output\n            correct_output = self.get_correct_output(temperature)\n\n            message_output = f\"\\n\\nI called your function {method_string}({temperature}) and it returned:\\n{user_output}\\n\\nInstead, your {method_string} function should have returned:\\n{correct_output}\"\n\n            if correct_output == user_output:\n                pass\n            else:\n                sys.exit(message_output)\n\n    def extract_constant(self, code, constant_name):\n        # Extract the value of a constant from the code\n        pattern = f\"{constant_name}\\s*=\\s*(\\d+)\"\n        match = re.search(pattern, code)\n        if match:\n            return int(match.group(1))\n        return None\n\n    def get_correct_output(self, temperature):\n        # Calculate the correct output based on the temperature\n        if temperature <= 0:\n            return \"Solid\"\n        elif 0 < temperature < 100:\n            return \"Liquid\"\n        else:\n            return \"Gas\"\n"}], "solutions": [{"file_name": "exercise.py", "content": "FREEZING_POINT = 0\nBOILING_POINT = 100\n\ndef water_state(temperature):\n    if temperature <= FREEZING_POINT:\n        return \"Solid\"\n    elif FREEZING_POINT < temperature < BOILING_POINT:\n        return \"Liquid\"\n    else:\n        return \"Gas\"\n"}]};
+
+      function renderCodeList(rootElement, codeList, className, titlePrefix) {
+        for (var i = 0; i < codeList.length; i++) {
+          var elem = codeList[i];
+          var jsElem = document.createElement("div");
+          jsElem.className = className;
+          var jsElemTitle = document.createElement("h3");
+          jsElemTitle.innerHTML = titlePrefix + " " + (i + 1);
+          var jsElemBody = document.createElement("code");
+          jsElemBody.className = "code-block black-block";
+          jsElemBody.innerHTML = "<pre>" + elem.content + "</pre>";
+          jsElem.appendChild(jsElemTitle);
+          jsElem.appendChild(jsElemBody);
+          rootElement.appendChild(jsElem);
+        }
+      }
+      
+      function main() {
+        // display the assignment
+        var codingTitle = document.getElementById("coding-title");
+        codingTitle.innerHTML = quizData.title;
+        
+        var codingInstructions = document.getElementById("coding-instructions");
+        if (quizData.hasInstructions) {
+          codingInstructions.innerHTML = quizData.instructions;
+        } else {
+          codingInstructions.innerHTML = "<span class=\"italic-text\">" + quizData.instructions
+            + "</span>";
+        }
+
+        // display the test(s)
+        var codingTests = document.getElementById("coding-tests");
+        if (!quizData.hasTests) {
+          codingTests.innerHTML = "<span class=\"italic-text\">" + quizData.tests + "</span>";
+        } else {
+          renderCodeList(codingTests, quizData.tests, "coding-test", "Test");
+        }
+        
+
+        // display the solution(s)
+        var codingSolutions = document.getElementById("coding-solutions");
+        if (!quizData.hasSolutions) {
+          codingSolutions.innerHTML = "<span class=\"italic-text\">" + quizData.solutions + "</span>";
+        } else {
+          renderCodeList(codingSolutions, quizData.solutions, "coding-solution", "Solution");
+        }
+      }
+    </script>
+  </body>
+</html>
