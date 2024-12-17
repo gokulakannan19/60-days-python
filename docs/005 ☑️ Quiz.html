@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      ul,
+      ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      code {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .quiz-content {
+        padding: 2.4rem;
+        word-break: break-word;
+        max-width: 86rem;
+        margin: 0 auto;
+      }
+      .quiz-container {
+        margin: 0 auto;
+        max-width: 84rem;
+        padding: 0;
+      }
+      .question {
+        margin-bottom: 5rem;
+      }
+      .question span {
+        font-size: 24px;
+        font-weight: 700;
+      }
+      .question-prompt {
+        margin-top: 0.8rem;
+        font-weight: 700;
+      }
+      .question-answer {
+        margin-top: 1.6rem;
+        padding-left: 0;
+        box-sizing: border-box;
+      }
+      .question-answer label {
+        max-width: 80rem;
+        position: relative;
+        cursor: pointer;
+        display: flex;
+        min-width: 18rem;
+        border: solid #1c1d1f 2px;
+      }
+      .question-answer div {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem;
+        width: 100%;
+      }
+      .question-answer div:hover {
+        background-color: #f5f5f5;
+      }
+      .question-answer input {
+        display: none;
+      }
+      .question-answer span {
+        width: 1rem;
+        height: 1rem;
+        margin-right: 1.6rem;
+        top: 0;
+        border-radius: 50%;
+        display: inline-block;
+        flex-shrink: 0;
+        border: 0.2rem solid #1c1d1f;
+        position: relative;
+      }
+      .selected {
+        background: #1c1d1f;
+        box-shadow: 0 0 0 0.4rem #fff inset;
+      }
+      .score {
+              position: fixed;
+            }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <div id="score" class="score">
+      <span>Score: N/A of N/A</span>
+    </div>
+    <div id="quiz-container" class="quiz-content"></div>
+
+    <script>
+      const quizData = {"pass_percent": 70, "questions": [{"_class": "assessment", "id": 47992682, "assessment_type": "multiple-choice", "prompt": {"question": "<p>What would the following code most likely output?</p><pre class=\"prettyprint linenums\">import time\nprint(time.strftime(\"%m.%d.%y\"))</pre>", "relatedLectureIds": "", "feedbacks": ["This option has the year in front, but the code has %m first which represents the month.", "This option uses dashes to separate the time units, but the code uses periods as separators.", "Yes, this is the correct option. %m extracts the month, %d extracts the day, and %y extracts the year."], "answers": ["<p>2023.29.11</p>", "<p>2023-29-11</p>", "<p>11.29.2023</p>"]}, "correct_response": ["c"], "section": "", "question_plain": "What would the following code most likely output?import time\nprint(time.strftime(\"%m.%d.%y\"))", "related_lectures": []}, {"_class": "assessment", "id": 47992724, "assessment_type": "multiple-choice", "prompt": {"question": "<p>What would the code most likely print out this time?&nbsp;You can use Google for help.</p><pre class=\"prettyprint linenums\">import time\nprint(time.strftime(\"%A\"))</pre>", "relatedLectureIds": "", "feedbacks": ["%A is a special datetime format code. Therefore, it is not printed out as a literal string.", "The full month name is extracted using %B, but %A extracts the name of the current day.", "The year is extracted using %y, but %A extracts the name of the current day.", "Yes, %A extracts the current day and %a extracts the abbreviation of the current day (i.e., Wed).", "\"Wed\" would be extracted if we used %a, but %A extract the full name of the day (i.e., Wednesday)."], "answers": ["<p>%A</p>", "<p>December</p>", "<p>2023</p>", "<p>Wednesday</p>", "<p>Wed</p>"]}, "correct_response": ["d"], "section": "", "question_plain": "What would the code most likely print out this time?&nbsp;You can use Google for help.import time\nprint(time.strftime(\"%A\"))", "related_lectures": []}, {"_class": "assessment", "id": 47992876, "assessment_type": "multiple-choice", "prompt": {"question": "<p>Which of the following is <strong>not</strong> a standard&nbsp;Python module?&nbsp;Feel free to use external resources to find out.</p><p>os</p><p>csv</p><p>time</p><p>astropy</p>", "relatedLectureIds": "", "feedbacks": ["os is indeed a standard module that provides functions for interacting with the operating system.", "csv is inded a standard module that provides functions to interact with CSV files.", "time is indeed a standard module that provides functions to get time information.", "astropy is not a standard module. It is a third-party module that is not written by the Python core developer team, but from third-party developers. Later in the course, you will learn how to install and use such third-party modules."], "answers": ["<p>os</p>", "<p>csv</p>", "<p>time</p>", "<p>astropy</p>"]}, "correct_response": ["d"], "section": "", "question_plain": "Which of the following is not a standard&nbsp;Python module?&nbsp;Feel free to use external resources to find out.oscsvtimeastropy", "related_lectures": []}, {"_class": "assessment", "id": 47993032, "assessment_type": "multiple-choice", "prompt": {"question": "<p>Based on what you know about standard modules, what is the most likely way to convert degrees to radians using the <code>math</code> module? Feel free to use external resources or your Python IDE if you like.</p>", "relatedLectureIds": "", "feedbacks": ["Yes, the math module contains a radians function that converts degrees to radians.", "This is incorrect because we should use math.radians instead of radians.math.", "This is incomplete because math should be imported first."], "answers": ["<pre class=\"prettyprint linenums\">import math\nrads =&nbsp;math.radians(20)</pre>", "<pre class=\"prettyprint linenums\">import math\nrads =&nbsp;radians.math(20)</pre>", "<pre class=\"prettyprint linenums\">rads =&nbsp;math.radians(20)</pre>"]}, "correct_response": ["a"], "section": "", "question_plain": "Based on what you know about standard modules, what is the most likely way to convert degrees to radians using the math module? Feel free to use external resources or your Python IDE if you like.", "related_lectures": []}]};
+      var correct = 0;
+      var total = 0;
+      const questionData = quizData.questions
+      const passPercent = quizData.pass_percent
+
+      function main() {
+        total = questionData.length;
+
+        var questions = [];
+        for (var i = 0; i < questionData.length; i++) {
+          var question = questionData[i];
+          var questionText = question.prompt.question;
+          var answers = question.prompt.answers;
+          var correctAnswer = question.correct_response[0];
+          var correctAnswerText = answers[correctAnswer.charCodeAt(0) - 97];
+          var questionObj = {
+            question: questionText,
+            correctAnswer: correctAnswerText,
+            answers: answers,
+            id: question.id,
+          };
+          questions.push(questionObj);
+        }
+
+        updateScore();
+
+        // display the questions
+        var questionsContainer = document.getElementById("quiz-container");
+        for (var i = 0; i < questions.length; i++) {
+          var question = questions[i];
+          var questionElement = document.createElement("form");
+          questionElement.className = "question";
+          questionElement.innerHTML =
+            "<span>Question " +
+            (i + 1) +
+            ":</span>" +
+            '<div class="question-prompt">' +
+            question.question +
+            "</div>";
+          questionElement.id = question.id;
+          questionElement.classList.add("quiz-container");
+          var answersElement = document.createElement("ul");
+          answersElement.className = "answers";
+          for (var j = 0; j < question.answers.length; j++) {
+            var answer = question.answers[j];
+            var answerElement = document.createElement("li");
+            answerElement.className = "answer";
+            answerElement.innerHTML =
+              '<label for="input-' +
+              question.id +
+              "-" +
+              j +
+              '"><div onclick="select(' +
+              question.id +
+              ", " +
+              j +
+              ')"><span></span><input id="input-' +
+              question.id +
+              "-" +
+              j +
+              '" type="radio" name="question' +
+              i +
+              '" value="' +
+              j +
+              '">' +
+              answer +
+              "</input></div></label>";
+            answerElement.classList.add("question-answer");
+            answersElement.appendChild(answerElement);
+          }
+
+          questionElement.appendChild(answersElement);
+
+          // add a submit button
+          var submitButton = document.createElement("button");
+          submitButton.className = "submit";
+          submitButton.innerHTML = "Submit";
+          submitButton.classList.add("submit-button");
+
+          submitButton.addEventListener("click", function (e) {
+            e.preventDefault();
+            var questionElement = e.target.parentElement;
+            var questionId = questionElement.id;
+            var question = questions.filter(function (q) {
+              return q.id == questionId;
+            })[0];
+
+            // set the border color of all answers to black
+            var answers = questionElement.getElementsByClassName("answer");
+            for (var i = 0; i < answers.length; i++) {
+              console.log(answers[i]);
+              answers[i].children[0].style.borderColor = "#1c1d1f";
+            }
+
+            var answer = questionElement.querySelector(
+              'input[type="radio"]:checked'
+            );
+            if (answer) {
+              var answerIndex = answer.value;
+              var answerText = question.answers[answerIndex];
+              if (answerText == question.correctAnswer) {
+                answer.parentElement.parentElement.style.borderColor =
+                  "limegreen";
+                // alert("Correct!");
+                correct++;
+                updateScore();
+              } else {
+                answer.parentElement.parentElement.style.borderColor = "red";
+                // alert("Incorrect!");
+              }
+            } else {
+              alert("Please select an answer.");
+            }
+          });
+
+          // add button
+          questionElement.appendChild(submitButton);
+
+          questionsContainer.appendChild(questionElement);
+        }
+      }
+
+      function select(question, answer) {
+        var questionElement = document.getElementById(question);
+        var answers = questionElement.getElementsByClassName("answer");
+        for (var i = 0; i < answers.length; i++) {
+          var span = answers[i].children[0].children[0].children[0];
+          var input = answers[i].children[0].children[0].children[1];
+          span.classList.remove("selected");
+          input.checked = false;
+        }
+        var span = answers[answer].children[0].children[0].children[0];
+        var input = answers[answer].children[0].children[0].children[1];
+        span.classList.add("selected");
+        input.checked = true;
+      }
+
+      function updateScore() {
+        var scoreElem = document.getElementById("score");
+        const score = (correct / total) * 100;
+        scoreElem.innerHTML = "Score: " + score + "/" + passPercent + "%";
+      }
+    </script>
+  </body>
+</html>
