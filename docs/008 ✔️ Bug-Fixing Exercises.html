@@ -1,0 +1,18 @@
+<h4>Bug-Fixing Exercise 1</h4><pre class="prettyprint linenums">import FreeSimpleGUI as sg
+
+label = sg.Text("What are dolphins?")
+option1 = sg.Radio("Amphibians", group_id="question1")
+option2 = sg.Radio("Fish", group_id="question1")
+option3 = sg.Radio("Mammals", group_id="question1")
+option4 = sg.Radio("Birds", group_id="question1")
+
+window = sg.Window("File Compressor",
+                   layout=[[label],
+                           [option1, 
+                            option2, 
+                            option3, 
+                            option4],
+                           ])
+
+window.read()
+window.close()</pre><p>The script above generates the output below:</p><figure><img height="223" src="https://img-c.udemycdn.com/redactor/raw/article_lecture/2022-06-20_10-56-23-287835bad30681251613f4be2a040b91.png" width="483"></figure><p>Change the script so that the output below is generated instead:</p><figure><img height="318" src="https://img-c.udemycdn.com/redactor/raw/article_lecture/2022-06-20_10-56-23-47bfc593bc81dc873eee14d655779288.png" width="287"></figure><p><a href="https://pythonhow.com/coding/d16b1/" rel="noopener noreferrer" target="_blank">Solution</a></p>
