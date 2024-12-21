@@ -11,7 +11,8 @@ convert_button = sg.Button("Convert")
 window = sg.Window("Convertor",
                    layout=[[label1, input1],
                            [label2, input2],
-                           [convert_button]])
+                           [convert_button]],
+                   font=("Helvitica", 20))
 
 window.read()
 window.close()
