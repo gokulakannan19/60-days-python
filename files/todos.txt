@@ -5,5 +5,4 @@ Gym
 bath
 office
 sleep
-thank you
 
