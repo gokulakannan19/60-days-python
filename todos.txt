@@ -2,6 +2,6 @@ Master Python!
 Waku up
 Brush
 Gym
-bath
 office4
 sleep
+

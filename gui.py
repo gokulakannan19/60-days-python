@@ -1,10 +1,15 @@
 import FreeSimpleGUI as sg
 from modules import functions
 import time
+import os
+
+if not os.path.exists("todos.txt"):
+    with open("todos.txt", "w") as file:
+        pass
 
 sg.theme("Black")
 
-current_time = sg.Text("", key="clock")
+# current_time = sg.Text(" ", key="clock")
 label = sg.Text("Type in a Todo")
 input_text = sg.InputText(tooltip="Enter a Todo", key="todo")
 add_button = sg.Button("Add")
@@ -15,16 +20,16 @@ complete_button = sg.Button("Complete")
 exit_button = sg.Button("Exit")
 
 window = sg.Window("My To-Do App",
-                   layout=[[current_time],
+                   layout=[
                            [label], [input_text, add_button],
                            [list_box, edit_button, complete_button],
                            [exit_button]],
                    font=("Helvitica", 20))
 
 while True:
-    event, values = window.read()
-    print(event)
-    window["clock"].update(value=time.strftime("%b, %d, %y %H:%M:%S"))
+    event, values = window.read(timeout=200)
+    # print(event)
+    # window["clock"].update(value=time.strftime("%b, %d, %y %H:%M:%S"))
     match event:
         case "Add":
             todos = functions.get_todos()
@@ -63,6 +68,6 @@ while True:
             window["todo"].update(value=values["todos"][0].strip("\n"))
 
         case sg.WIN_CLOSED:
-            break
+            exit()
 
 window.close()
