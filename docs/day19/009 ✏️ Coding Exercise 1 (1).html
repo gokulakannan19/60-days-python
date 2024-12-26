@@ -1,0 +1,13 @@
+<p>Your task for this exercise is to add a new feature to the webcam Streamlit app we built in today's bonus example video. If you don't have the code of the bonus example video, here it is:</p><pre class="prettyprint linenums"># Note: This script runs only on a local IDE with "streamlit run main.py"
+import streamlit as st
+from PIL import Image
+
+st.subheader("Color to Grayscale Converter")
+
+with st.expander("Start camera"):
+    camera_image = st.camera_input("Camera")
+
+if camera_image:
+    img = Image.open(camera_image)
+    gray_camera_img = img.convert('L')
+    st.image(gray_camera_img)</pre><p>You need to add a feature to that program that allows users to upload an image from their computer files. Then, the app converts the uploaded image to grayscale and displays it. </p><p><strong>Hint</strong>:&nbsp;You can use <code>uploaded_image&nbsp;=&nbsp;st.file_uploader("Upload Image") </code>to create a "Browse File" component.</p><p>The end product should be as shown in the screenshot down below.</p><p><br></p><p><br></p><figure><img src="https://img-c.udemycdn.com/redactor/raw/article_lecture/2022-07-05_15-57-39-d1aba1a1a9ba5e5ec006fe4d6b0f4352.png"></figure><p><a href="https://pythonhow.com/coding/d19c1/" rel="noopener noreferrer" target="_blank">Solution</a></p>

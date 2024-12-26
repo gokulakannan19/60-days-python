@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz</title>
+
+    <style>
+      body {
+        font-family: sf pro text, -apple-system, BlinkMacSystemFont, Roboto,
+          segoe ui, Helvetica, Arial, sans-serif, apple color emoji,
+          segoe ui emoji, segoe ui symbol;
+        font-weight: 400;
+        line-height: 22.4px;
+        font-size: 16px;
+      }
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      ul,
+      ol {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      code {
+        background-color: #fff;
+        border: 1px solid #d1d7dc;
+        color: #b4690e;
+        font-size: 90%;
+        padding: 0.2rem 0.4rem;
+      }
+      .quiz-content {
+        padding: 2.4rem;
+        word-break: break-word;
+        max-width: 86rem;
+        margin: 0 auto;
+      }
+      .quiz-container {
+        margin: 0 auto;
+        max-width: 84rem;
+        padding: 0;
+      }
+      .question {
+        margin-bottom: 5rem;
+      }
+      .question span {
+        font-size: 24px;
+        font-weight: 700;
+      }
+      .question-prompt {
+        margin-top: 0.8rem;
+        font-weight: 700;
+      }
+      .question-answer {
+        margin-top: 1.6rem;
+        padding-left: 0;
+        box-sizing: border-box;
+      }
+      .question-answer label {
+        max-width: 80rem;
+        position: relative;
+        cursor: pointer;
+        display: flex;
+        min-width: 18rem;
+        border: solid #1c1d1f 2px;
+      }
+      .question-answer div {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem;
+        width: 100%;
+      }
+      .question-answer div:hover {
+        background-color: #f5f5f5;
+      }
+      .question-answer input {
+        display: none;
+      }
+      .question-answer span {
+        width: 1rem;
+        height: 1rem;
+        margin-right: 1.6rem;
+        top: 0;
+        border-radius: 50%;
+        display: inline-block;
+        flex-shrink: 0;
+        border: 0.2rem solid #1c1d1f;
+        position: relative;
+      }
+      .selected {
+        background: #1c1d1f;
+        box-shadow: 0 0 0 0.4rem #fff inset;
+      }
+      .score {
+              position: fixed;
+            }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <div id="score" class="score">
+      <span>Score: N/A of N/A</span>
+    </div>
+    <div id="quiz-container" class="quiz-content"></div>
+
+    <script>
+      const quizData = {"pass_percent": 70, "questions": [{"_class": "assessment", "id": 48813008, "assessment_type": "multiple-choice", "prompt": {"question": "<p>All but one of the methods below generate interactive components. Select the method that does not generate an interactive component with which the user cannot interact.</p>", "relatedLectureIds": "", "feedbacks": ["A text area is considered an interactive component because the user can type in text in the text box.", "A text input is considered an interactive component because the user can type in text in the text box.", "Yes, a subheader is a static component that simply shows some static text.", "A checkbox is considered an interactive component because the user can check and uncheck the checkbox, thus interacting with the component."], "answers": ["<p><code>st.text_area()</code> </p>", "<p><code>st.text_input()</code> </p>", "<p><code>st.subheader()</code> </p>", "<p><code>st.checkbox()</code> </p>"]}, "correct_response": ["c"], "section": "", "question_plain": "All but one of the methods below generate interactive components. Select the method that does not generate an interactive component with which the user cannot interact.", "related_lectures": []}, {"_class": "assessment", "id": 48813128, "assessment_type": "multiple-choice", "prompt": {"question": "<p>Which of the options do you think would generate the widget in the screenshot below? </p><p><strong>Note</strong>: We haven't covered the component in the screenshot earlier, but you can judge by the names of the methods in the options to answer the question. You can also use <code>dir()</code> in your Python console to explore the available methods of <em>streamlit</em>:</p><pre class=\"prettyprint linenums\">import streamlit as st\ndir(st)</pre><img src=\"https://img-c.udemycdn.com/redactor/raw/quiz_question/2022-07-05_15-25-24-93ae39cfef3e7c72b64acf09c27d6dba.png\">", "relatedLectureIds": "", "feedbacks": ["Yes, the slider() method creates a slider object as shown in the screenshot. This particular slider allows the user to select a number between 10 and 30.", "A radio() method generates a series of radio buttons. This particular example would generate two radio buttons with labels 10 and 30.", "A button() method generates a button component. This particular example would generate a button that has an Amount label and it shows the text \"Get the Amount\" as a tooltip when the user hovers the mouse on the button."], "answers": ["<pre class=\"prettyprint linenums\">st.slider(\"Amount\", min_value=10, max_value=30)</pre>", "<pre class=\"prettyprint linenums\">st.radio(\"Amount\", options=[10, 30])</pre>", "<pre class=\"prettyprint linenums\">st.button(\"Amount\", help=\"Amount\")</pre>"]}, "correct_response": ["a"], "section": "", "question_plain": "Which of the options do you think would generate the widget in the screenshot below? Note: We haven't covered the component in the screenshot earlier, but you can judge by the names of the methods in the options to answer the question. You can also use dir() in your Python console to explore the available methods of streamlit:import streamlit as st\ndir(st)", "related_lectures": []}, {"_class": "assessment", "id": 48813178, "assessment_type": "multiple-choice", "prompt": {"question": "<p>As soon as the user selected&nbsp;\"30\" the message \"You made the right choice!\" appeared as shown in the screenshot below. Which of the code snippets would make that possible?</p><img src=\"https://img-c.udemycdn.com/redactor/raw/quiz_question/2022-07-05_15-36-08-bd9661542f6df5e59d1e9336828ba089.png\">", "relatedLectureIds": "", "feedbacks": ["This is the right answer. Once the user selects \"30\", the info widget (shown in blue color) shows up.", "This is not the right choice because this code would display a title component which is big text that does not look like the info box with the blue background shown in the screenshot.", "This code does not generate the webpage shown in the screenshot because the code has an error in \"user_choice = 30\". The line should have been \"user_choice == 30\"."], "answers": ["<pre class=\"prettyprint linenums\">import streamlit as st\n\nuser_choice = st.radio(\"Amount\", options=[10, 20, 30])\nif user_choice == 30:\n    st.info(\"You made the right choice!\")</pre>", "<pre class=\"prettyprint linenums\">import streamlit as st\n\nuser_choice = st.radio(\"Amount\", options=[10, 20, 30])\nif user_choice == 30:\n    st.title(\"You made the right choice!\")</pre>", "<pre class=\"prettyprint linenums\">import streamlit as st\n\nuser_choice = st.radio(\"Amount\", options=[10, 20, 30])\nif user_choice = 30:\n    st.info(\"You made the right choice!\")</pre>"]}, "correct_response": ["a"], "section": "", "question_plain": "As soon as the user selected&nbsp;\"30\" the message \"You made the right choice!\" appeared as shown in the screenshot below. Which of the code snippets would make that possible?", "related_lectures": []}]};
+      var correct = 0;
+      var total = 0;
+      const questionData = quizData.questions
+      const passPercent = quizData.pass_percent
+
+      function main() {
+        total = questionData.length;
+
+        var questions = [];
+        for (var i = 0; i < questionData.length; i++) {
+          var question = questionData[i];
+          var questionText = question.prompt.question;
+          var answers = question.prompt.answers;
+          var correctAnswer = question.correct_response[0];
+          var correctAnswerText = answers[correctAnswer.charCodeAt(0) - 97];
+          var questionObj = {
+            question: questionText,
+            correctAnswer: correctAnswerText,
+            answers: answers,
+            id: question.id,
+          };
+          questions.push(questionObj);
+        }
+
+        updateScore();
+
+        // display the questions
+        var questionsContainer = document.getElementById("quiz-container");
+        for (var i = 0; i < questions.length; i++) {
+          var question = questions[i];
+          var questionElement = document.createElement("form");
+          questionElement.className = "question";
+          questionElement.innerHTML =
+            "<span>Question " +
+            (i + 1) +
+            ":</span>" +
+            '<div class="question-prompt">' +
+            question.question +
+            "</div>";
+          questionElement.id = question.id;
+          questionElement.classList.add("quiz-container");
+          var answersElement = document.createElement("ul");
+          answersElement.className = "answers";
+          for (var j = 0; j < question.answers.length; j++) {
+            var answer = question.answers[j];
+            var answerElement = document.createElement("li");
+            answerElement.className = "answer";
+            answerElement.innerHTML =
+              '<label for="input-' +
+              question.id +
+              "-" +
+              j +
+              '"><div onclick="select(' +
+              question.id +
+              ", " +
+              j +
+              ')"><span></span><input id="input-' +
+              question.id +
+              "-" +
+              j +
+              '" type="radio" name="question' +
+              i +
+              '" value="' +
+              j +
+              '">' +
+              answer +
+              "</input></div></label>";
+            answerElement.classList.add("question-answer");
+            answersElement.appendChild(answerElement);
+          }
+
+          questionElement.appendChild(answersElement);
+
+          // add a submit button
+          var submitButton = document.createElement("button");
+          submitButton.className = "submit";
+          submitButton.innerHTML = "Submit";
+          submitButton.classList.add("submit-button");
+
+          submitButton.addEventListener("click", function (e) {
+            e.preventDefault();
+            var questionElement = e.target.parentElement;
+            var questionId = questionElement.id;
+            var question = questions.filter(function (q) {
+              return q.id == questionId;
+            })[0];
+
+            // set the border color of all answers to black
+            var answers = questionElement.getElementsByClassName("answer");
+            for (var i = 0; i < answers.length; i++) {
+              console.log(answers[i]);
+              answers[i].children[0].style.borderColor = "#1c1d1f";
+            }
+
+            var answer = questionElement.querySelector(
+              'input[type="radio"]:checked'
+            );
+            if (answer) {
+              var answerIndex = answer.value;
+              var answerText = question.answers[answerIndex];
+              if (answerText == question.correctAnswer) {
+                answer.parentElement.parentElement.style.borderColor =
+                  "limegreen";
+                // alert("Correct!");
+                correct++;
+                updateScore();
+              } else {
+                answer.parentElement.parentElement.style.borderColor = "red";
+                // alert("Incorrect!");
+              }
+            } else {
+              alert("Please select an answer.");
+            }
+          });
+
+          // add button
+          questionElement.appendChild(submitButton);
+
+          questionsContainer.appendChild(questionElement);
+        }
+      }
+
+      function select(question, answer) {
+        var questionElement = document.getElementById(question);
+        var answers = questionElement.getElementsByClassName("answer");
+        for (var i = 0; i < answers.length; i++) {
+          var span = answers[i].children[0].children[0].children[0];
+          var input = answers[i].children[0].children[0].children[1];
+          span.classList.remove("selected");
+          input.checked = false;
+        }
+        var span = answers[answer].children[0].children[0].children[0];
+        var input = answers[answer].children[0].children[0].children[1];
+        span.classList.add("selected");
+        input.checked = true;
+      }
+
+      function updateScore() {
+        var scoreElem = document.getElementById("score");
+        const score = (correct / total) * 100;
+        scoreElem.innerHTML = "Score: " + score + "/" + passPercent + "%";
+      }
+    </script>
+  </body>
+</html>
